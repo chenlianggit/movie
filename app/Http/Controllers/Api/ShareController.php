@@ -10,7 +10,7 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Controller;
-use App\Models\wxAccessToken;
+use App\Models\WxAccessToken;
 use OSS\OssClient;
 use Illuminate\Http\Request;
 
