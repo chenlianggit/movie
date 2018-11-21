@@ -15,4 +15,4 @@ yarn-error.log
 .env
 .phpunit.result.cache
 /storage/*
-/public/img/*
+/public/img/qrcode/*
