@@ -50,6 +50,7 @@ class ShareController extends Controller
             'area'  => $area,
             'lang'  => $area,
             'year'  => $year,
+            'photo' => $req->input('photo',''),
 
         ];
 
