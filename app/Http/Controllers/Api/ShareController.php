@@ -13,10 +13,14 @@ use App\Http\Controllers\Controller;
 
 class ShareController extends Controller
 {
+    public function info(){
+	phpinfo();
+   }
+
     public function index(){
         $http_type  = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
         $host       = $http_type . $_SERVER['HTTP_HOST'];
-        $url        = $host.'/img.php';
+        $url        = $host.'/php/img.php';
         $img        = self::makeImg($url);
         return json_encode(['code'=>200,'msg'=>'获取成功','data'=>['img'=>$host.$img]]);
     }
@@ -27,9 +31,10 @@ class ShareController extends Controller
      * @return string
      */
     static function makeImg($weburl){
-        $phantomJs   = @exec("pwd").'/phantomjs/bin/phantomjs ';
+	$path = @exec('pwd');
+        $phantomJs   = $path.'/phantomjs/bin/phantomjs ';
         $saveurl = "/img/".time().rand(1000,9999).'.png';
-        $command = $phantomJs.' '." Public/js/snap.js  '".$weburl."' ".$saveurl;
+        $command = $phantomJs.' '." {$path}/js/snap.js  '".$weburl."' ".$path.$saveurl;
         @exec($command);
 //        return self::toUpload($saveurl);
         return $saveurl;

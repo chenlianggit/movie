@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 Route::namespace('Api')->group(function(){
     Route::get('/img', 'ShareController@index');
-
+    Route::get("info", "ShareController@info");
 });
 
 
