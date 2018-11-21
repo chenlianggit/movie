@@ -6,8 +6,36 @@
  * Time: 下午2:39
  */
 
+const OK    = 200;
+const ERROR = 0;
+
 function array2object($arr)
 {
     $json = json_encode($arr);
     return json_decode($json, false);
+}
+
+
+/**
+ * 输出json数据
+ * @param int $code
+ * @param string $message
+ * @param string $data
+ * @param string $noCache
+ */
+function outputToJson($code, $message, $data = [])
+{
+    header("Content-type: application/json; charset=utf-8");
+    $msg = array(
+        'code' => $code,
+        'msg' => $message,
+        'data' => $data,
+    );
+
+    $msg = json_encode($msg);
+
+    header('Content-Length:' . strlen($msg));
+
+    echo $msg;
+    exit();
 }
