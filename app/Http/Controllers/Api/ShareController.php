@@ -43,7 +43,7 @@ class ShareController extends Controller
         $path   = "pages/video-show/video-show?id={$id}";
         $qrcode = self::_getQrcode($path,350,false);
         $data   = [
-            'code'  => $qrcode,
+            'code'  => $this->host.$qrcode,
             'name'  => $name,
             'des'   => $des,
             'actor' => $actor,
@@ -53,7 +53,7 @@ class ShareController extends Controller
 
         ];
 
-        $url        = $this->host.'/img.php?'.self::_urlencode($data);
+        $url        = $this->host.'php/img.php?'.self::_urlencode($data);
         $img        = self::makeImg($url);
         return json_encode(['code'=>200,'msg'=>'获取成功','data'=>['img'=>$img]]);
     }
