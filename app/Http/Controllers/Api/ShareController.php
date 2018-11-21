@@ -23,7 +23,7 @@ class ShareController extends Controller
         $host       = $http_type . $_SERVER['HTTP_HOST'];
         $url        = $host.'/php/img.php';
         $img        = self::makeImg($url);
-        return json_encode(['code'=>200,'msg'=>'获取成功','data'=>['img'=>$host.$img]]);
+        return json_encode(['code'=>200,'msg'=>'获取成功','data'=>['img'=>$img]]);
     }
 
     /**
