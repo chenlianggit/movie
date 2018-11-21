@@ -149,9 +149,7 @@ class ShareController extends Controller
             'is_hyaline' => $is_hyaline,  // 是否透明
         ];
         $res = CommandController::send_post($url,$data);
-        $path       = @exec('pwd');
-
-        $imageName = $path."img/qrcode/".time().rand(1000,9999).'.png';
+        $imageName = "img/".time().rand(1000,9999).'.png';
         $r = file_put_contents( $imageName, $res);//返回的是字节数
         if (!$r) {
             return false;
