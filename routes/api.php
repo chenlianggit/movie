@@ -14,9 +14,9 @@ use Illuminate\Http\Request;
 */
 
 Route::namespace('Api')->group(function(){
-    Route::get('img', 'ShareController@getImg');
-    Route::get("info", "ShareController@info");
-    Route::get('qrcode','ShareController@getQrcode');
+    Route::any('img', 'ShareController@getImg');
+    Route::any("info", "ShareController@info");
+    Route::any('qrcode','ShareController@getQrcode');
 });
 
 
