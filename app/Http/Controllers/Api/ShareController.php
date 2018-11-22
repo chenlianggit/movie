@@ -40,7 +40,7 @@ class ShareController extends Controller
         $lang  = $req->input('lang','');     # 语言
         $year  = $req->input('year','');     # 年份
 
-        $path   = "pages/video-show/video-show?id={$id}";
+        $path   = "pages/index/index?sid={$id}";
         $qrcode = self::_getQrcode($path,350,false);
         $data   = [
             'code'  => $this->host.$qrcode,
