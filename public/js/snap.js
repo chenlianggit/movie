@@ -5,6 +5,8 @@ var url = args[1];
 var filename = args[2];
 
 page.open(url, function () {
-        page.render(filename);
+    setTimeout(function(){
+        page.render( 'google.png');
         phantom.exit();
+    },300);
 });
