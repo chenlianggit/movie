@@ -34,6 +34,7 @@ class ShareController extends Controller
 
         $id     = $req->input('id',13743);   # 默认仙剑 影片ID
         $name   = $req->input('name','');    # 名称
+        $pic    = $req->input('pic','');
         $des    = $req->input('des','');     # 简介
         $actor  = $req->input('actor','');   # 演员
         $area  = $req->input('area','');     # 地区
