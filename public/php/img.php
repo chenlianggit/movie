@@ -12,7 +12,7 @@
             width:750px;
             min-height:1334px;
             overflow: hidden;
-            /*background-image: url("img.png");*/
+            background-image: url("img.png");
             background-size:cover;
             background-position: center center;
             background-repeat: no-repeat;
@@ -23,13 +23,17 @@
         .share-box{width:750px;height:1334px;overflow:hidden;}
         .share-code{
             background:#fff;
-            width:400px;
-            height:480px;
-            margin:700px auto 0 auto;
+            width:380px;
+            height:450px;
+            margin:710px auto 0 auto;
             text-align:center;
+            /*border-radius:50% 50% 0 0;*/
+            border-radius:50% 50% 0 0;
+            overflow:hidden;
+
         }
         .share-vCode{width:355px;height:355px;margin-top: 30px}
-        .share-state{color:#BABABA;font-size:24px;margin-top: 20px}
+        .share-state{color:#BABABA;font-size:24px;margin-top: 15px}
     </style>
 </head>
 <body>
