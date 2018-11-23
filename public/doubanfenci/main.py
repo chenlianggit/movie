@@ -4,7 +4,6 @@
 # @Author   : 五年陈
 # @File     : main.py
 
-#coding:utf-8
 import random
 
 import flask
@@ -13,18 +12,13 @@ from PIL import Image
 from flask import request
 from flask import jsonify
 
-__author__ = 'hang'
-
 import warnings
 warnings.filterwarnings("ignore")
 import jieba    #分词包
 import numpy    #numpy计算包
 import re
 import pandas as pd
-import matplotlib.pyplot as plt
 from urllib import parse
-import matplotlib
-matplotlib.rcParams['figure.figsize'] = (10.0, 5.0)
 from wordcloud import WordCloud #词云包
 import numpy as np
 
@@ -160,10 +154,6 @@ def main():
     word_frequence_list = dict(word_frequence_list)
     wordcloud=wordcloud.fit_words(word_frequence_list)
 
-    # plt.imshow(wordcloud)
-    # plt.axis('off')
-    # plt.figure()
-    # plt.show()  # 显示图片
     wordcloud.to_file('img/{}.png'.format(str(id)))
     data = {
         'img':'{}.png'.format(str(id))
