@@ -36,8 +36,8 @@
 <div class="page">
     <div class="share-box">
         <div class="share-code">
-<!--            <img src="--><?php //echo $_GET['code']; ?><!--" align="center" alt="" class="share-vCode">-->
-<!--            <div class="share-state">长按识别二维码</div>-->
+            <img src="<?php echo $_GET['code']; ?>" align="center" alt="" class="share-vCode">
+            <div class="share-state">长按识别二维码</div>
         </div>
 
 
