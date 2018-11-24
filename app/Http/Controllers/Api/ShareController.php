@@ -30,6 +30,12 @@ class ShareController extends Controller
         phpinfo();
     }
 
+    /**
+     * 获取分享图
+     * @param Request $req
+     * @return string
+     * @throws \OSS\Core\OssException
+     */
     public function getImg(Request $req){
 
         $id     = $req->input('id',13743);   # 默认仙剑 影片ID
@@ -52,6 +58,7 @@ class ShareController extends Controller
             'lang'  => $area,
             'year'  => $year,
             'photo' => $req->input('photo',''),
+            'img'   => self::getDouBanImg($name),
 
         ];
 
@@ -60,6 +67,10 @@ class ShareController extends Controller
         return json_encode(['code'=>200,'msg'=>'获取成功','data'=>['img'=>$img]]);
     }
 
+    /**
+     * 获取二维码
+     * @param Request $req
+     */
     public function getQrcode(Request $req){
         $id     = $req->input('id',13743); #仙剑1 ID
         $path   = "pages/video-show/video-show?id={$id}";
@@ -67,6 +78,23 @@ class ShareController extends Controller
         outputToJson(OK, '获取成功', ['img'=>$this->host.$qrcode]);
     }
 
+    /**
+     * 获取豆瓣评分图
+     * @param $name
+     * @param int $id
+     * @return bool|string
+     */
+    public static function getDouBanImg($name , $id = 0){
+        if(!$name){
+            return '';
+        }
+        $url = "http://103.80.24.117:6789/main?name={$name}";
+        $img = file_get_contents($url);
+        if(preg_match('/.*(\.png)$/', $img)){
+            return $img;
+        }
+        return '';
+    }
 
     /**
      * url地址

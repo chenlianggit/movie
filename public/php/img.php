@@ -12,7 +12,7 @@
             width:750px;
             min-height:1334px;
             overflow: hidden;
-            background-image: url("img.png");
+            background-image: url("<?php echo $_GET['img'] ?? 'img.png'; ?>");
             background-size:cover;
             background-position: center center;
             background-repeat: no-repeat;

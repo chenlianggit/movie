@@ -16,3 +16,5 @@ yarn-error.log
 .phpunit.result.cache
 /storage/*
 /public/img/*
+/public/doubanfenci/.idea
+/public/doubanfenci/img/*

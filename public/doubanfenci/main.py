@@ -4,6 +4,7 @@
 # @Author   : 五年陈
 # @File     : main.py
 
+#coding:utf-8
 import random
 
 import flask
@@ -19,10 +20,21 @@ import numpy    #numpy计算包
 import re
 import pandas as pd
 from urllib import parse
+import matplotlib
+matplotlib.rcParams['figure.figsize'] = (10.0, 5.0)
 from wordcloud import WordCloud #词云包
 import numpy as np
 
 
+
+ip_proxy = [
+    '183.147.209.74:4242',
+
+]
+def get_random_ip():
+    proxy_host = 'http://{}'.format(random.choice(ip_proxy))
+    proxies = {"https": proxy_host}
+    return proxies
 
 def getMovieIdHeader():
     headers = {
@@ -59,8 +71,9 @@ def getMovieCommentHeader():
 
 
 def get(url, headers):
-
+    # data = requests.get(url, headers=headers,proxies=get_random_ip(), verify=False)
     data = requests.get(url, headers=headers)
+    print(data)
     return data.json()
 
 #获取豆瓣视频ID
@@ -154,11 +167,16 @@ def main():
     word_frequence_list = dict(word_frequence_list)
     wordcloud=wordcloud.fit_words(word_frequence_list)
 
+    # plt.imshow(wordcloud)
+    # plt.axis('off')
+    # plt.figure()
+    # plt.show()  # 显示图片
     wordcloud.to_file('img/{}.png'.format(str(id)))
-    data = {
-        'img':'{}.png'.format(str(id))
-    }
-    return jsonify({"code": 200, "msg": "success",'data':data})
+    hostUrl = 'http://douban.q2017.com/'
+    # data = {
+    #     'img':'{}.png'.format(str(id))
+    # }
+    return hostUrl + '{}.png'.format(str(id))
 
 
 if __name__ == '__main__':
