@@ -112,12 +112,22 @@ server = flask.Flask(__name__)
 def main():
     name = request.values.get('name','') # %E5%93%88%E5%93%88
     if name == "":
-        return jsonify({"code": 0, "msg": "error"})
+        return ''
     name = parse.unquote(name) # 解码字符串
     print(name)
-    id = getMovieId(name)
-    #循环获取第一个电影的前10页评论
-    commentList = getCommentsById(id,10000)
+    try:
+        id = getMovieId(name)
+    except:
+        id = 0
+
+    commentList = []
+    if int(id) > 0:
+        try:
+            # 循环获取第一个电影的前10页评论
+            commentList = getCommentsById(id, 10000)
+        except:
+            pass
+    commentList.append(name)
 
     #将列表中的数据转换为字符串
     comments = ''
@@ -167,10 +177,7 @@ def main():
     word_frequence_list = dict(word_frequence_list)
     wordcloud=wordcloud.fit_words(word_frequence_list)
 
-    # plt.imshow(wordcloud)
-    # plt.axis('off')
-    # plt.figure()
-    # plt.show()  # 显示图片
+
     wordcloud.to_file('img/{}.png'.format(str(id)))
     hostUrl = 'http://douban.q2017.com/'
     # data = {

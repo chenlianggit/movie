@@ -78,6 +78,10 @@ class ShareController extends Controller
         outputToJson(OK, '获取成功', ['img'=>$this->host.$qrcode]);
     }
 
+    public function getDouban(Request $req){
+        $name = $req->input('name');
+        echo self::getDouBanImg($name);
+    }
     /**
      * 获取豆瓣评分图
      * @param $name
@@ -89,7 +93,11 @@ class ShareController extends Controller
             return '';
         }
         $url = "http://103.80.24.117:6789/main?name={$name}";
-        $img = file_get_contents($url);
+        try{
+            $img = file_get_contents($url);
+        }catch (\ErrorException $e){
+            return '';
+        }
         if(preg_match('/.*(\.png)$/', $img)){
             return $img;
         }
