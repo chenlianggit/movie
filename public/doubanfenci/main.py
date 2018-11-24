@@ -4,7 +4,6 @@
 # @Author   : 五年陈
 # @File     : main.py
 
-#coding:utf-8
 import random
 
 import flask

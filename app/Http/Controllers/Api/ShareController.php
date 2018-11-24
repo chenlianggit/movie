@@ -92,6 +92,7 @@ class ShareController extends Controller
         if(!$name){
             return '';
         }
+        $name = urlencode($name);
         $url = "http://103.80.24.117:6789/main?name={$name}";
         try{
             $img = file_get_contents($url);
