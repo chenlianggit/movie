@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Img;
 use App\Models\WxAccessToken;
 use OSS\OssClient;
 use Illuminate\Http\Request;
@@ -47,10 +48,25 @@ class ShareController extends Controller
         $lang  = $req->input('lang','');     # 语言
         $year  = $req->input('year','');     # 年份
 
-        $path   = "pages/index/index?sid={$id}";
-        $qrcode = self::_getQrcode($path,350,false);
+        $info = Img::firstOrCreate(['v_id'=>$id]);
+
+        if($info->share_img){
+            outputToJson(OK, '获取成功',['img'=>$info->share_img]);
+        }
+        # 二维码从数据库取
+        if(!$info->qrcode_img){
+            $path   = "pages/index/index?sid={$id}";
+            $info->qrcode_img = self::_getQrcode($path,350,false);
+            $info->save();
+        }
+        # 豆瓣评论从数据库取
+        if(!$info->douban_img){
+            $info->douban_img = self::getDouBanImg($name);
+            $info->save();
+        }
+
         $data   = [
-            'code'  => $this->host.$qrcode,
+            'code'  => $this->host.$info->qrcode_img,
             'name'  => $name,
             'des'   => $des,
             'actor' => $actor,
@@ -58,13 +74,13 @@ class ShareController extends Controller
             'lang'  => $area,
             'year'  => $year,
             'photo' => $req->input('photo',''),
-            'img'   => self::getDouBanImg($name),
-
+            'img'   => $info->douban_img,
         ];
 
-        $url        = $this->host.'php/img.php?'.self::_urlencode($data);
-        $img        = self::makeImg($url);
-        return json_encode(['code'=>200,'msg'=>'获取成功','data'=>['img'=>$img]]);
+        $url    = $this->host.'php/img.php?'.self::_urlencode($data);
+        $info->share_img    = self::makeImg($url);
+        $info->save();
+        outputToJson(OK, '获取成功',['img'=>$info->share_img]);
     }
 
     /**

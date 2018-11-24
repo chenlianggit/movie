@@ -18,6 +18,6 @@ class Model extends EloquentModel
     //禁止注入的字段
     public  $guarded = [];
 
-    public $timestamps = false;
+
 
 }

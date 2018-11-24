@@ -14,4 +14,6 @@ class WxAccessToken extends Model
     public $table = 'wx_access_token';
 
     public $primaryKey = 'id';
+
+    public $timestamps = false;
 }
