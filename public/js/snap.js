@@ -8,5 +8,5 @@ page.open(url, function () {
     setTimeout(function(){
         page.render(filename);
         phantom.exit();
-    },3000);
+    },5000);
 });
