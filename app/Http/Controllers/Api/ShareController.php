@@ -66,7 +66,7 @@ class ShareController extends Controller
         }
 
         $data   = [
-            'code'  => $this->host.$info->qrcode_img,
+            'code'  => $info->qrcode_img,
             'name'  => $name,
             'des'   => $des,
             'actor' => $actor,
@@ -86,12 +86,13 @@ class ShareController extends Controller
     /**
      * 获取二维码
      * @param Request $req
+     * @throws \OSS\Core\OssException
      */
     public function getQrcode(Request $req){
         $id     = $req->input('id',13743); #仙剑1 ID
         $path   = "pages/video-show/video-show?id={$id}";
         $qrcode = self::_getQrcode($path,350,false);
-        outputToJson(OK, '获取成功', ['img'=>$this->host.$qrcode]);
+        outputToJson(OK, '获取成功', ['img'=>$qrcode]);
     }
 
     public function getDouban(Request $req){
@@ -188,6 +189,7 @@ class ShareController extends Controller
      * @param int $width
      * @param bool $is_hyaline
      * @return bool|string
+     * @throws \OSS\Core\OssException
      */
     public  static function _getQrcode($path, $width=355, $is_hyaline=true){
         $access_token = self::_getNewAccessToken();
@@ -209,9 +211,8 @@ class ShareController extends Controller
         if (!$r) {
             return false;
         }
-//        $codeImg = self::toUpload($imageName);
-        $codeImg = $imageName;
-        return $codeImg;
+        $path       = @exec('pwd');
+        return self::toUpload($path.'/'.$imageName);
     }
 
 
