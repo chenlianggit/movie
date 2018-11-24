@@ -212,4 +212,25 @@ class ShareController extends Controller
         $dataStr    = ltrim($dataStr,'&');
         return $dataStr;
     }
+
+
+    /**
+     * 影评
+     */
+    public function getMessage(){
+        $data = [
+            '爬取4万评论',
+            '服务器压力大',
+            '耐心等待15秒',
+            '影评生成img',
+            '我是渣渣辉',
+            '豆瓣8万评',
+            '一朝生成图',
+            '在线生成中..',
+            '服务器小耐等',
+            '分享好友乐开怀',
+            '全部评论成精华',
+        ];
+        outputToJson(OK,'success',$data);
+    }
 }

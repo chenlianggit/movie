@@ -18,6 +18,7 @@ Route::namespace('Api')->group(function(){
     Route::any("info", "ShareController@info");
     Route::any('qrcode','ShareController@getQrcode');
     Route::any('douban','ShareController@getDouban');
+    Route::any('message','ShareController@getMessage');
 });
 
 
