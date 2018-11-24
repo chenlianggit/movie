@@ -27,4 +27,19 @@ class CommandController
 
         return $result;
     }
+
+    public static function send_get( $url) {
+        $options = array(
+            'http' => array(
+                'method'  => 'GET',
+                'header'  => 'application/x-www-form-urlencoded; charset=UTF-8',
+                'timeout' => 60
+                //超时时间
+            )
+        );
+        $context = stream_context_create( $options );
+        $result = file_get_contents( $url, false, $context );
+
+        return $result;
+    }
 }

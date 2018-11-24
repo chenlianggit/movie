@@ -95,7 +95,7 @@ class ShareController extends Controller
         $name = urlencode($name);
         $url = "http://103.80.24.117:6789/main?name={$name}";
         try{
-            $img = file_get_contents($url);
+            $img = CommandController::send_get($url);
         }catch (\ErrorException $e){
             return '';
         }
