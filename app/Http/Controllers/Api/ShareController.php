@@ -48,7 +48,7 @@ class ShareController extends Controller
         $lang  = $req->input('lang','');     # 语言
         $year  = $req->input('year','');     # 年份
 
-        $info = Img::firstOrCreate(['v_id'=>$id]);
+        $info = Img::firstOrCreate(['v_id'=>$id],['name'=>$name]);
 
         if($info->share_img){
             outputToJson(OK, '获取成功',['img'=>$info->share_img]);
