@@ -41,12 +41,6 @@ class ShareController extends Controller
 
         $id     = $req->input('id',13743);   # 默认仙剑 影片ID
         $name   = $req->input('name','');    # 名称
-        $pic    = $req->input('pic','');
-        $des    = $req->input('des','');     # 简介
-        $actor  = $req->input('actor','');   # 演员
-        $area  = $req->input('area','');     # 地区
-        $lang  = $req->input('lang','');     # 语言
-        $year  = $req->input('year','');     # 年份
 
         $info = Img::firstOrCreate(['v_id'=>$id],['name'=>$name]);
 
@@ -68,12 +62,6 @@ class ShareController extends Controller
         $data   = [
             'code'  => $this->host.$info->qrcode_img,
             'name'  => $name,
-            'des'   => $des,
-            'actor' => $actor,
-            'area'  => $area,
-            'lang'  => $area,
-            'year'  => $year,
-            'photo' => $req->input('photo',''),
             'img'   => $info->douban_img,
         ];
 
@@ -235,6 +223,7 @@ class ShareController extends Controller
      */
     public function getMessage(){
         $data = [
+            '返回等待成功',
             '爬取4万评论',
             '服务器压力大',
             '耐心等待15秒',
@@ -243,14 +232,13 @@ class ShareController extends Controller
             '豆瓣8万评',
             '一朝生成图',
             '在线生成中..',
-            '服务器小耐等',
+            '服务器开小差',
             '分享好友乐开怀',
             '全部评论成精华',
             '学会寻找影片',
             '依靠搜索变强大',
             '学会分享破单身',
             '异步生成',
-            '返回等待成功',
             '不等待先看电影',
             '看会电影再拿图',
             '15秒后生成好',
@@ -265,6 +253,8 @@ class ShareController extends Controller
             '爱爱爱爱备忘录',
             '听君一席话',
             '少读十年书',
+            '返回他也生成',
+            '一会再来点就行',
         ];
         outputToJson(OK,'success',$data);
     }
